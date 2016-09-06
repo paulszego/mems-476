@@ -9,6 +9,7 @@
 
 /* USER CODE BEGIN Includes */
 #include "stm32l4xx_nucleo.h"
+#include "x_nucleo_iks01a1_temperature.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -16,7 +17,7 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-
+static void*    tempHandle;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -55,8 +56,16 @@ int main( void )
     /* USER CODE BEGIN 2 */
     initialise_monitor_handles();
 
-    BSP_LED_Init( LED2 );
-    BSP_PB_Init( BUTTON_USER, BUTTON_MODE_EXTI );
+    DrvStatusTypeDef status = BSP_TEMPERATURE_Init( TEMPERATURE_SENSORS_AUTO, &tempHandle );
+    if ( status != COMPONENT_OK )
+    {
+        printf( "Temp init failed" );
+    }
+    status = BSP_TEMPERATURE_Sensor_Enable( tempHandle );
+    if ( status != COMPONENT_OK )
+    {
+        printf( "Temp enable failed" );
+    }
     /* USER CODE END 2 */
 
     /* Infinite loop */
@@ -66,9 +75,12 @@ int main( void )
         /* USER CODE END WHILE */
 
         /* USER CODE BEGIN 3 */
+        float   temp;
+        status = BSP_TEMPERATURE_Get_Temp( tempHandle, &temp );
+
         BSP_LED_Toggle( LED2 );
-        printf( "Hello, World!\n" );
-        HAL_Delay( 1000 );
+        printf( "Hello, World: %d\n", (int)( temp * 100.0 ) );
+        HAL_Delay( 3000 );
     }
     /* USER CODE END 3 */
 }

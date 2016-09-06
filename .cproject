@@ -50,12 +50,19 @@
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Drivers/STM32L4xx_HAL_Driver/Inc&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Drivers/STM32L4xx_HAL_Driver/Inc/Legacy&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/STM32L4xx_Nucleo&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/X_NUCLEO_IKS01A1&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/Common&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/X_NUCLEO_IKS01A1&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/hts221&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/lis3mdl&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/lps22hb&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/lps25hb&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/lsm6ds0&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/lsm6ds3&quot;"/>
 								</option>
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.defs.539312863" name="Defined symbols (-D)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.defs" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
 									<listOptionValue builtIn="false" value="STM32L476xx"/>
+									<listOptionValue builtIn="false" value="USE_STM32L4XX_NUCLEO"/>
 								</option>
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.input.85987984" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.input"/>
 							</tool>
@@ -69,10 +76,17 @@
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/STM32L4xx_Nucleo&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/X_NUCLEO_IKS01A1&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/Common&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/hts221&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/lis3mdl&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/lps22hb&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/lps25hb&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/lsm6ds0&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/lsm6ds3&quot;"/>
 								</option>
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.defs.1367155294" name="Defined symbols (-D)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.defs" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
 									<listOptionValue builtIn="false" value="STM32L476xx"/>
+									<listOptionValue builtIn="false" value="USE_STM32L4XX_NUCLEO"/>
 								</option>
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input.536216284" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input"/>
 							</tool>
@@ -108,7 +122,14 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="BSP/Components/hts221"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="BSP/Components/lis3mdl"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="BSP/Components/lps22hb"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="BSP/Components/lps25hb"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="BSP/Components/lsm6ds0"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="BSP/Components/lsm6ds3"/>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="BSP/STM32L4xx_Nucleo"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="BSP/X_NUCLEO_IKS01A1"/>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Drivers/CMSIS/Device/ST/STM32L4xx/Src"/>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Drivers/STM32L4xx_HAL_Driver/Src"/>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Src"/>
@@ -169,10 +190,17 @@
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/STM32L4xx_Nucleo&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/X_NUCLEO_IKS01A1&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/Common&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/hts221&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/lis3mdl&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/lps22hb&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/lps25hb&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/lsm6ds0&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/lsm6ds3&quot;"/>
 								</option>
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.defs.812098003" name="Defined symbols (-D)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.defs" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
 									<listOptionValue builtIn="false" value="STM32L476xx"/>
+									<listOptionValue builtIn="false" value="USE_STM32L4XX_NUCLEO"/>
 								</option>
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.input.211078091" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.input"/>
 							</tool>
@@ -186,10 +214,17 @@
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/STM32L4xx_Nucleo&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/X_NUCLEO_IKS01A1&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/Common&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/hts221&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/lis3mdl&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/lps22hb&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/lps25hb&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/lsm6ds0&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/BSP/Components/lsm6ds3&quot;"/>
 								</option>
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.defs.206999623" name="Defined symbols (-D)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.defs" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
 									<listOptionValue builtIn="false" value="STM32L476xx"/>
+									<listOptionValue builtIn="false" value="USE_STM32L4XX_NUCLEO"/>
 								</option>
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input.234294107" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input"/>
 							</tool>
