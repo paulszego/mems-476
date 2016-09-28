@@ -20,6 +20,7 @@
 #include "Trace.h"
 #include "crc.h"
 #include "least_squares.h"
+#include "sphere-fit.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -58,9 +59,10 @@ static float    accSensitivity;
 //  TODO    use C++ as a better C
 //static const int                  M = 100;
 
+//#define USE_TEST_DATA
 #define M 100           //  10 times a second, 10 seconds
-float   cal_values[M][3];
-float   cal_params[LSQ_N];
+float   cal_values[3];
+float   cal_params[4];
 
 
 /* USER CODE END PV */
@@ -100,21 +102,21 @@ extern void initialise_monitor_handles( void );
  * @return  the residual for this sample.
  */
 
-static float32_t fx(    uint32_t            i,
-                        const float32_t*    b,
-                        float32_t*          j )
-{
-    float   pwr;
-
-    arm_sub_f32( cal_values[i], (float32_t*)b, j, 3 );          //  J = X - B
-    arm_power_f32( j, 3, &pwr );        //  pwr = (x-a)^2 + (y-b)^2 + (z-c)^2
-
-    j[3] = b[3];                        //  df/dr = r
-    arm_scale_f32( j, -2.0, j, 4 );     //  scale everything by -2
-
-    //  (x-a)^2 + (y-b)^2 + (z-c)^2 - r^2
-    return pwr - ( b[3] * b[3] );
-}
+//static float32_t fx(    uint32_t            i,
+//                        const float32_t*    b,
+//                        float32_t*          j )
+//{
+//    float   pwr;
+//
+//    arm_sub_f32( cal_values[i], (float32_t*)b, j, 3 );          //  J = X - B
+//    arm_power_f32( j, 3, &pwr );        //  pwr = (x-a)^2 + (y-b)^2 + (z-c)^2
+//
+//    j[3] = b[3];                        //  df/dr = r
+//    arm_scale_f32( j, -2.0, j, 4 );     //  scale everything by -2
+//
+//    //  (x-a)^2 + (y-b)^2 + (z-c)^2 - r^2
+//    return pwr - ( b[3] * b[3] );
+//}
 
 static void checkCalibration( bool force )
 {
@@ -127,7 +129,20 @@ static void checkCalibration( bool force )
         return;
     }
 
+    sphere_fit_init();
+
 #ifdef USE_TEST_DATA
+//    sphere_fit_pnt( 8.9129979413812240, 13.2544157159778480, 20.0881828807218770 );
+//    sphere_fit_pnt( 7.2598045769044570, 12.5417470253629300, 20.2346573196046000 );
+//    sphere_fit_pnt( 7.8738424666584930, 12.8905587195475860, 20.1216148013347000 );
+//    sphere_fit_pnt( 7.4232683487079845, 12.8675403169556370, 20.3211186336997540 );
+//    sphere_fit_pnt( 8.6775710169102320, 11.1809115776406890, 20.2495063004654400 );
+//    sphere_fit_pnt( 9.0869435469348140, 12.0536281136592760, 19.8884044880361340 );
+//    sphere_fit_pnt( 8.3811460486387240, 12.9677740228016220, 19.8809695876807000 );
+//    sphere_fit_pnt( 7.9122793899494230, 13.5679572316817560, 20.0775710461557100 );
+//    sphere_fit_pnt( 9.0608001018391470, 12.4775654341670850, 19.4844953719025260 );
+//    sphere_fit_pnt( 8.5155725388313480, 12.6619991843578640, 20.1781024656281360 );
+
     cal_values[0][0] =  8.9129979413812240;
     cal_values[0][1] = 13.2544157159778480;
     cal_values[0][2] = 20.0881828807218770;
@@ -158,6 +173,11 @@ static void checkCalibration( bool force )
     cal_values[9][0] =  8.5155725388313480;
     cal_values[9][1] = 12.6619991843578640;
     cal_values[9][2] = 20.1781024656281360;
+
+    for ( int i = 0; i < M; i++ )
+    {
+        sphere_fit_data( cal_values[i] );
+    }
 #else
     printf( "\n\nMagnetometer calibration.\n" );
     for ( int i = 3; i > 0; --i )
@@ -169,7 +189,6 @@ static void checkCalibration( bool force )
 
     //  Take a reading every 100 milliseconds until full.
     int     remaining   = M;
-    int     index       = 0;
     while ( remaining > 0 )
     {
         HAL_Delay( 100 );
@@ -181,29 +200,17 @@ static void checkCalibration( bool force )
         }
 
         //  Convert to milli-Gauss.
-        cal_values[index][0] = axes.AXIS_X * magSensitivity / 1000.0;
-        cal_values[index][1] = axes.AXIS_Y * magSensitivity / 1000.0;
-        cal_values[index][2] = axes.AXIS_Z * magSensitivity / 1000.0;
+        cal_values[0] = axes.AXIS_X * magSensitivity / 1000.0;
+        cal_values[1] = axes.AXIS_Y * magSensitivity / 1000.0;
+        cal_values[2] = axes.AXIS_Z * magSensitivity / 1000.0;
+        sphere_fit_data( cal_values );
         --remaining;
-        ++index;
         trace_printf( "%d\n", remaining );
     }
 #endif
 
     //  Setup initial guess: use the mean values.
-    float   xm  = 0.0;
-    float   ym  = 0.0;
-    float   zm  = 0.0;
-    for ( int i = 0; i < M; i++ )
-    {
-        xm += cal_values[i][0];
-        ym += cal_values[i][1];
-        zm += cal_values[i][2];
-    }
-    cal_params[0]    = xm / M;
-    cal_params[1]    = ym / M;
-    cal_params[2]    = zm / M;
-
+    sphere_fit_mean( cal_params );
 #ifdef USE_TEST_DATA
     cal_params[3]    = 1.0;
 #else
@@ -211,7 +218,8 @@ static void checkCalibration( bool force )
 #endif
 
     trace_printf( "Data collected, calibrating...\n\n" );
-    lsq_optimize( cal_params, M, fx );
+//    lsq_optimize( cal_params, M, fx );
+    sphere_fit_calc( cal_params );
 
 //    printf( "\nPlace the board face UP and press the blue button...\n" );
 //    for ( int i = 3; i > 0; --i )

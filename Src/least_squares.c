@@ -8,7 +8,7 @@
 #include "least_squares.h"
 #include "Trace.h"
 
-//#define TRACE_LSQ
+#define TRACE_LSQ
 #define MAX_ITER    100
 
 //  An extra 2*N*(N+1) floats.
@@ -52,8 +52,6 @@ extern bool lsq_optimize(   float32_t*  beta,
                         uint16_t    M,
                         lsq_func    f )
 {
-
-
     float32_t   r;                  //  rᵢ, the residual
     float32_t   rms;                //  root-mean-square error
     float32_t   last_rms = 0;       //  for comparison
